@@ -34,7 +34,8 @@ class CliApp {
     // https://site.ip138.com/domain/read.do?domain=github.com&time=1626958087
     const params = { domain, time: Date.now() };
     const url = nx.param(params, 'https://site.ip138.com/domain/read.do');
-    const res = await fetch(url).then((res) => res.json());
+    const headers = { 'Content-Type': 'application/json' };
+    const res = await fetch(url, { headers }).then((res) => res.json());
     return res.data.map((item) => item.ip);
   }
 
