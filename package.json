@@ -30,7 +30,6 @@
   "dependencies": {
     "@jswork/next": "^1.2.2",
     "@jswork/next-param": "^1.0.12",
-    "@jswork/next-qs": "^1.0.9",
     "clipboardy": "^4.0.0",
     "commander": "^11.1.0",
     "load-json-file": "^7.0.1"
