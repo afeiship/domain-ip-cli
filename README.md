@@ -2,6 +2,7 @@
 > Cli templates for javascript.
 
 ## template
+
 ```sh
 # clone the template
 git clone git@github.com:aric-tpls/domain-ip-cli.git
