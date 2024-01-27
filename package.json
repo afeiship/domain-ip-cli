@@ -1,8 +1,7 @@
 {
-  "name": "domain-ip-cli",
-  "private": true,
+  "name": "@jswork/domain-ip-cli",
   "version": "1.0.0",
-  "description": "TODO: CLI_DECRIPTION",
+  "description": "Find the fastest IP addresses for a given domain.",
   "type": "module",
   "bin": {
     "dic": "./bin/index.js"

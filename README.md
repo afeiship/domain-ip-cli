@@ -1,5 +1,5 @@
 # domain-ip-cli
-> Cli templates for javascript.
+> Find the fastest IP addresses for a given domain.
 
 ## usage
 ```shell
