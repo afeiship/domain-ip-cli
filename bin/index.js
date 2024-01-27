@@ -17,6 +17,7 @@ program.option('-v, --verbose', 'verbose output').parse(process.argv);
 /**
  * @help: dic -h
  * @description: dic -v
+ * @reference: https://site.ip138.com/github.com/
  */
 
 class CliApp {
