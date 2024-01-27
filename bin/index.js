@@ -36,7 +36,7 @@ class CliApp {
     const url = nx.param(params, 'https://site.ip138.com/domain/read.do');
     const headers = { 'Content-Type': 'application/json' };
     const res = await fetch(url, { headers }).then((res) => res.json());
-    return res.data.map((item) => item.ip);
+    return res.data?.map((item) => item.ip) || [];
   }
 
   async run() {
@@ -48,7 +48,11 @@ class CliApp {
     // for of
     for (const domain of domains) {
       const ips = await this.queryIp(domain);
-      results.push({ domain, ip: ips[0] });
+      const ip = ips[0];
+      const isInvalid = ip === '0.0.0.0';
+      if (ips.length) {
+        if (!isInvalid) results.push({ domain, ip });
+      }
     }
 
     const hosts = results.map((item) => `${item.ip}\t${item.domain}`).join('\n');
