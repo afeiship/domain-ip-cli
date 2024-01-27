@@ -3,17 +3,20 @@
 import { Command } from 'commander';
 import { join } from 'path';
 import { loadJsonFileSync } from 'load-json-file';
+import clipboardy from 'clipboardy';
+
+import '@jswork/next-param';
 
 const __dirname = new URL('../', import.meta.url).pathname;
 const pkg = loadJsonFileSync(join(__dirname, 'package.json'));
 const program = new Command();
 
 program.version(pkg.version);
-program.option('-f, --force', 'force to create').parse(process.argv);
+program.option('-v, --verbose', 'verbose output').parse(process.argv);
 
 /**
  * @help: dic -h
- * @description: dic -f
+ * @description: dic -v
  */
 
 class CliApp {
@@ -22,8 +25,33 @@ class CliApp {
     this.opts = program.opts();
   }
 
-  run() {
-    console.log('run cli: ', __dirname, this.args, this.opts);
+  log(...args) {
+    const { verbose } = this.opts;
+    if (verbose) console.log('🚚', ...args);
+  }
+
+  async queryIp(domain) {
+    // https://site.ip138.com/domain/read.do?domain=github.com&time=1626958087
+    const params = { domain, time: Date.now() };
+    const url = nx.param(params, 'https://site.ip138.com/domain/read.do');
+    const res = await fetch(url).then((res) => res.json());
+    return res.data.map((item) => item.ip);
+  }
+
+  async run() {
+    const domains = this.args;
+    const results = [];
+
+    // for of
+    for (const domain of domains) {
+      const ips = await this.queryIp(domain);
+      results.push({ domain, ip: ips[0] });
+    }
+
+    const hosts = results.map((item) => `${item.ip}\t${item.domain}`).join('\n');
+    clipboardy.writeSync(hosts);
+    console.log(hosts);
+    console.log('🚀 hosts copied!');
   }
 }
 
