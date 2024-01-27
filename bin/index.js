@@ -43,6 +43,8 @@ class CliApp {
     const domains = this.args;
     const results = [];
 
+    if (!domains.length) return console.log('🚀 Please input domains!');
+
     // for of
     for (const domain of domains) {
       const ips = await this.queryIp(domain);
