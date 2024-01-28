@@ -17,3 +17,11 @@ dic github.com \
     pkg-npm.githubusercontent.com \
     -v
 ```
+
+> result:
+```conf
+20.205.243.166	github.com
+185.199.110.133	raw.githubusercontent.com
+
+🚀 hosts copied!
+```
